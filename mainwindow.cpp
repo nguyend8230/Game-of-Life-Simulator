@@ -61,13 +61,11 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
     if(alive_cells.contains((QList<int> {col,row}))) {
         alive_cells.remove(QList<int>{col,row});
         flipped_cells.remove(QList<int>{col,row});
-        update_neighbors_count(col,row,false);
     }
     // flips the cell from dead to alive
     else {
         alive_cells.insert(QList<int> {col,row});
         flipped_cells.insert(QList<int> {col,row});
-        update_neighbors_count(col,row,true);
     }
 
 
