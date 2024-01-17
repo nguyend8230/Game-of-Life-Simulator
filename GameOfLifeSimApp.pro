@@ -11,7 +11,8 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    simulation_logic.cpp
+    simulation_logic.cpp \
+    test_logic.cpp
 
 HEADERS += \
     mainwindow.h

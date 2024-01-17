@@ -60,22 +60,27 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
     // flips the cell from alive to dead
     if(alive_cells.contains((QList<int> {col,row}))) {
         alive_cells.remove(QList<int>{col,row});
+        flipped_cells.remove(QList<int>{col,row});
+        update_neighbors_count(col,row,false);
     }
     // flips the cell from dead to alive
     else {
-        alive_cells.insert(QList<int>{col,row});
+        alive_cells.insert(QList<int> {col,row});
+        flipped_cells.insert(QList<int> {col,row});
+        update_neighbors_count(col,row,true);
     }
 
-    set_neighbors_of_cell(col,row);
 
     update(QRect(col*CELL_DIMENSION,row*CELL_DIMENSION,CELL_DIMENSION,CELL_DIMENSION));
 }
 
 void MainWindow::on_start_sim_button_clicked() {
-    simulation_toggle = !simulation_toggle;
-    if(simulation_toggle) {
-        simulate_all();
-    }
+    // this should be in simulation all
+    alive_cells.clear();
+    // simulation_toggle = !simulation_toggle;
+    // if(simulation_toggle) {
+    //     simulate_all();
+    // }
 }
 
 void MainWindow::on_reset_button_clicked() {

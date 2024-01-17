@@ -65,6 +65,7 @@ private:
 
     // events
     void mousePressEvent(QMouseEvent* event) override;
+    void keyPressEvent(QKeyEvent *event) override;
     void paintEvent(QPaintEvent* event) override;
 };
 #endif // MAINWINDOW_H
