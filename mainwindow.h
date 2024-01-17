@@ -49,8 +49,11 @@ private:
     // set to represent the alive cells for faster access
     QSet<QList<int>> alive_cells;
 
-    // // 2d list to keep track of the number of neighbors a cell has
+    // 2d list to keep track of the number of neighbors a cell has
     QMap<QList<int>,int> neighbors_count;
+
+    // list of cells that needs to be flipped in the next iteration of simulate()
+    QSet<QList<int>> flipped_cells;
 
     // -----FUNCTIONS-----
 
