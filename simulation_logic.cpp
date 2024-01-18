@@ -2,7 +2,6 @@
 
 void MainWindow::update_neighbors(int col, int row, bool is_alive) {
     int arr[] = {1,0,-1,0,1,1,-1,-1,1};
-    // QList<int> cell {col,row};
     for(int i = 0; i < 8; i++) {
         int neigh_col = col+arr[i];
         int neigh_row = row+arr[i+1];
@@ -53,9 +52,11 @@ void MainWindow::simulate() {
 
 void MainWindow::simulate_all() {
     QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, [this, timer]() {
-        simulate();
-        if(!simulation_toggle) {
+    connect(timer, &QTimer::timeout, this, [=]() {
+        if(simulation_toggle) {
+            simulate();
+        }
+        else {
             timer->stop();
         }
     });

@@ -57,11 +57,16 @@ private:
 
     // -----FUNCTIONS-----
 
+    // update the neighbors of a cell, assuming that the cell will be flipped
     void update_neighbors(int col, int row, bool is_alive);
 
-    //remove the cells that don't need to be flipped in flipped_cells
+    // remove the cells that don't need to be flipped in flipped_cells
     void clean_flipped_cells();
+
+    // simulate one iteration with the given position
     void simulate();
+
+    // simulate until simulation_toggle is off
     void simulate_all();
 
     // events
