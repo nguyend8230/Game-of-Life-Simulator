@@ -58,7 +58,6 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
     // if the click is out of bound or if there's currently a simulation running
     if(col >= GRID_WIDTH || row >= GRID_HEIGHT || simulation_toggle) return;
 
-    flipped_cells.insert(cell);
     flip_cell(cell);
 
     update(QRect(col*CELL_DIMENSION,row*CELL_DIMENSION,CELL_DIMENSION,CELL_DIMENSION));
@@ -67,17 +66,13 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
 void MainWindow::on_start_sim_button_clicked() {
     simulation_toggle = !simulation_toggle;
     if(simulation_toggle) {
-        clean_flipped_cells();
-        simulate_all();
+        start_simulation();
     }
 }
 
 void MainWindow::on_reset_button_clicked() {
     // stop all animation
     simulation_toggle = false;
-
-    neighbors_count.clear();
-    alive_cells.clear();
-    flipped_cells.clear();
+    reset_simulation_states();
     update();
 }

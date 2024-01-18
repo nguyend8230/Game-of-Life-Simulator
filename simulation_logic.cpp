@@ -1,5 +1,16 @@
 #include "mainwindow.h"
 
+void MainWindow::start_simulation() {
+    clean_flipped_cells();
+    simulate_all();
+}
+
+void MainWindow::reset_simulation_states() {
+    neighbors_count.clear();
+    alive_cells.clear();
+    flipped_cells.clear();
+}
+
 void MainWindow::update_neighbors(int col, int row, bool is_alive) {
     int arr[] = {1,0,-1,0,1,1,-1,-1,1};
     for(int i = 0; i < 8; i++) {
@@ -28,6 +39,7 @@ void MainWindow::clean_flipped_cells() {
 void MainWindow::flip_cell(QList<int> cell) {
     int col = cell[0];
     int row = cell[1];
+    flipped_cells.insert(cell);
     update_neighbors(col,row,alive_cells.contains(cell));
     if(alive_cells.contains(cell)) {
         alive_cells.remove(cell);
@@ -39,9 +51,9 @@ void MainWindow::flip_cell(QList<int> cell) {
 }
 
 void MainWindow::simulate() {
-    qInfo() << "start alive cells:" << alive_cells;
-    qInfo() << "start flipped cells:" << flipped_cells;
-    qInfo() << "start neighbors count:" << neighbors_count << Qt::endl;
+    // qInfo() << "start alive cells:" << alive_cells;
+    // qInfo() << "start flipped cells:" << flipped_cells;
+    // qInfo() << "start neighbors count:" << neighbors_count << Qt::endl;
 
     if(flipped_cells.empty()) {
         simulation_toggle = false;
@@ -55,9 +67,9 @@ void MainWindow::simulate() {
         flip_cell(cell);
     }
 
-    qInfo() << "end alive cells:" << alive_cells;
-    qInfo() << "end flipped cells:" << flipped_cells;
-    qInfo() << "end neighbors count:" << neighbors_count << Qt::endl;
+    // qInfo() << "end alive cells:" << alive_cells;
+    // qInfo() << "end flipped cells:" << flipped_cells;
+    // qInfo() << "end neighbors count:" << neighbors_count << Qt::endl;
 
     clean_flipped_cells();
 }
