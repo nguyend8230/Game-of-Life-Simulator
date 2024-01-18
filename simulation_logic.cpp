@@ -25,6 +25,19 @@ void MainWindow::clean_flipped_cells() {
     });
 }
 
+void MainWindow::flip_cell(QList<int> cell) {
+    int col = cell[0];
+    int row = cell[1];
+    update_neighbors(col,row,alive_cells.contains(cell));
+    if(alive_cells.contains(cell)) {
+        alive_cells.remove(cell);
+    }
+    else {
+        alive_cells.insert(cell);
+    }
+    update(QRect(col*CELL_DIMENSION,row*CELL_DIMENSION,CELL_DIMENSION,CELL_DIMENSION));
+}
+
 void MainWindow::simulate() {
     if(flipped_cells.empty()) {
         simulation_toggle = false;
@@ -34,17 +47,8 @@ void MainWindow::simulate() {
     // need a temp set because I can't insert to flipped_cells while iterating through it since flipped_cells is a set
     QSet<QList<int>> temp = flipped_cells;
 
-    for(QList<int> cell: as_const(temp)) {
-        int col = cell[0];
-        int row = cell[1];
-        update_neighbors(col,row,alive_cells.contains(cell));
-        if(alive_cells.contains(cell)) {
-            alive_cells.remove(cell);
-        }
-        else {
-            alive_cells.insert(cell);
-        }
-        update(QRect(col*CELL_DIMENSION,row*CELL_DIMENSION,CELL_DIMENSION,CELL_DIMENSION));
+    for(const QList<int>& cell: as_const(temp)) {
+        flip_cell(cell);
     }
 
     clean_flipped_cells();

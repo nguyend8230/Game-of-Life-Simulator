@@ -53,6 +53,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 void MainWindow::mousePressEvent(QMouseEvent* event) {
     int col = int(event->position().x()/CELL_DIMENSION);
     int row = int(event->position().y()/CELL_DIMENSION);
+    QList<int> cell {col,row};
 
     // if the click is out of bound or if there's currently a simulation running
     if(col >= GRID_WIDTH || row >= GRID_HEIGHT || simulation_toggle) return;

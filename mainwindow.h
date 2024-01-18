@@ -57,6 +57,12 @@ private:
 
     // -----FUNCTIONS-----
 
+    void start_simulation();
+
+    void reset_simulation_states();
+
+    void flip_cell(QList<int> cell);
+
     // update the neighbors of a cell, assuming that the cell will be flipped
     void update_neighbors(int col, int row, bool is_alive);
 
