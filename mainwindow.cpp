@@ -60,12 +60,12 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
     // flips the cell from alive to dead
     if(alive_cells.contains((QList<int> {col,row}))) {
         alive_cells.remove(QList<int>{col,row});
-        flipped_cells.remove(QList<int>{col,row});
+        update_neighbors_count(col,row,true);
     }
     // flips the cell from dead to alive
     else {
         alive_cells.insert(QList<int> {col,row});
-        flipped_cells.insert(QList<int> {col,row});
+        update_neighbors_count(col,row,false);
     }
 
 
@@ -73,12 +73,11 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
 }
 
 void MainWindow::on_start_sim_button_clicked() {
-    // this should be in simulation all
-    alive_cells.clear();
-    // simulation_toggle = !simulation_toggle;
-    // if(simulation_toggle) {
-    //     simulate_all();
-    // }
+    simulation_toggle = !simulation_toggle;
+    if(simulation_toggle) {
+        clean_flipped_cells();
+        simulate_all();
+    }
 }
 
 void MainWindow::on_reset_button_clicked() {
@@ -87,5 +86,6 @@ void MainWindow::on_reset_button_clicked() {
 
     neighbors_count.clear();
     alive_cells.clear();
+    flipped_cells.clear();
     update();
 }

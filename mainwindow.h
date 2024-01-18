@@ -43,7 +43,6 @@ private:
 
     bool simulation_toggle = false;
 
-
     // list of squares in the grid
     QList<QRect> sq_list;
 
@@ -60,6 +59,7 @@ private:
 
     //simulation functions
     void update_neighbors_count(int col, int row, bool is_alive);
+    void clean_flipped_cells();
     void simulate();
     void simulate_all();
 
