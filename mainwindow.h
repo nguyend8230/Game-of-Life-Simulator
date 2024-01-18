@@ -57,8 +57,9 @@ private:
 
     // -----FUNCTIONS-----
 
-    //simulation functions
-    void update_neighbors_count(int col, int row, bool is_alive);
+    void update_neighbors(int col, int row, bool is_alive);
+
+    //remove the cells that don't need to be flipped in flipped_cells
     void clean_flipped_cells();
     void simulate();
     void simulate_all();

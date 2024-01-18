@@ -60,14 +60,13 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
     // flips the cell from alive to dead
     if(alive_cells.contains((QList<int> {col,row}))) {
         alive_cells.remove(QList<int>{col,row});
-        update_neighbors_count(col,row,true);
+        update_neighbors(col,row,true);
     }
     // flips the cell from dead to alive
     else {
         alive_cells.insert(QList<int> {col,row});
-        update_neighbors_count(col,row,false);
+        update_neighbors(col,row,false);
     }
-
 
     update(QRect(col*CELL_DIMENSION,row*CELL_DIMENSION,CELL_DIMENSION,CELL_DIMENSION));
 }
