@@ -2,20 +2,16 @@
 
 void MainWindow::update_neighbors_count(int col, int row, bool is_alive) {
     int arr[] = {1,0,-1,0,1,1,-1,-1,1};
-    if(is_alive) {
-        for(int i = 0; i < 8; i++) {
-            if(col+arr[i] >= 0 && col+arr[i] < GRID_WIDTH && row+arr[i+1] >= 0 && row+arr[i+1] < GRID_HEIGHT) {
-                neighbors_count[QList<int>{col+arr[i],row+arr[i+1]}]++;
-            }
+    QList<int> cell {col,row};
+    for(int i = 0; i < 8; i++) {
+        int neigh_col = col+arr[i];
+        int neigh_row = row+arr[i+1];
+        QList<int> neighbor {neigh_col, neigh_row};
+        if(neigh_col >= 0 && neigh_col < GRID_WIDTH && neigh_row >= 0 && neigh_row < GRID_HEIGHT) {
+            neighbors_count[neighbor]+=(is_alive? -1: 1);
         }
     }
-    else {
-        for(int i = 0; i < 8; i++) {
-            if(col+arr[i] >= 0 && col+arr[i] < GRID_WIDTH && row+arr[i+1] >= 0 && row+arr[i+1] < GRID_HEIGHT) {
-                neighbors_count[QList<int>{col+arr[i],row+arr[i+1]}]--;
-            }
-        }
-    }
+
 }
 
 void MainWindow::simulate() {
