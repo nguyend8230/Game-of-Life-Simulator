@@ -39,6 +39,10 @@ void MainWindow::flip_cell(QList<int> cell) {
 }
 
 void MainWindow::simulate() {
+    qInfo() << "start alive cells:" << alive_cells;
+    qInfo() << "start flipped cells:" << flipped_cells;
+    qInfo() << "start neighbors count:" << neighbors_count << Qt::endl;
+
     if(flipped_cells.empty()) {
         simulation_toggle = false;
         return;
@@ -50,6 +54,10 @@ void MainWindow::simulate() {
     for(const QList<int>& cell: as_const(temp)) {
         flip_cell(cell);
     }
+
+    qInfo() << "end alive cells:" << alive_cells;
+    qInfo() << "end flipped cells:" << flipped_cells;
+    qInfo() << "end neighbors count:" << neighbors_count << Qt::endl;
 
     clean_flipped_cells();
 }

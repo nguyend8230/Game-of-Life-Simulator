@@ -58,16 +58,8 @@ void MainWindow::mousePressEvent(QMouseEvent* event) {
     // if the click is out of bound or if there's currently a simulation running
     if(col >= GRID_WIDTH || row >= GRID_HEIGHT || simulation_toggle) return;
 
-    // flips the cell from alive to dead
-    if(alive_cells.contains((QList<int> {col,row}))) {
-        alive_cells.remove(QList<int>{col,row});
-        update_neighbors(col,row,true);
-    }
-    // flips the cell from dead to alive
-    else {
-        alive_cells.insert(QList<int> {col,row});
-        update_neighbors(col,row,false);
-    }
+    flipped_cells.insert(cell);
+    flip_cell(cell);
 
     update(QRect(col*CELL_DIMENSION,row*CELL_DIMENSION,CELL_DIMENSION,CELL_DIMENSION));
 }
